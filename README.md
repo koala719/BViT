@@ -8,7 +8,7 @@ Recent works have demonstrated that transformer can achieve promising performanc
 |  Model   | Top1-Acc(%)  |  Params (M)   | Flops(G)  | Model  |
 |  ----  | ----  |  ----  | ----  | ----  |
 | BViT-5M  | 74.8 |  5.7  | 1.2  | [Download](https://pan.baidu.com/s/1G_Zh-qDbAtcYvVYLXoF-Nw?pwd=dbgi)   |
-| BViT-22M  | 81.6 |  22.1  | 4.7  | [Download](https://arxiv.org/abs/2202.06268)   |
+| BViT-22M  | 81.6 |  22.1  | 4.7  | [Download](https://pan.baidu.com/s/1q02tHE9Jk3M9PcIiK4vrdg?pwd=65q1)   |
 
 ## Evaluation
 Install PyTorch 1.7.0+ and torchvision 0.8.1+ and timm 0.3.2.
