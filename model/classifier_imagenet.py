@@ -17,19 +17,13 @@ import torchvision.transforms as transforms
 import pytorch_lightning as pl
 from pytorch_lightning.core import LightningModule
 
-from .layer.g_mlp_pytorch import gMLP_ImageNet_Ti, gMLP_ImageNet_B, gMLP_ImageNet_S
-from .layer.deit_model import DeiT_Ti, DeiT_B, DeiT_S
-from torchvision.models import resnet50, resnet34
+
+from .layer.bvit import BViT_Ti, BViT_B
+
 
 Models = dict(
-gMLP_ImageNet_Ti=gMLP_ImageNet_Ti,
-gMLP_ImageNet_S=gMLP_ImageNet_S,
-gMLP_ImageNet_B=gMLP_ImageNet_B,
-DeiT_Ti=DeiT_Ti,
-DeiT_B=DeiT_B,
-DeiT_S=DeiT_S,
-ResNet50 = resnet50,
-ResNet34 = resnet34,
+BViT_5=BViT_Ti,
+BViT_21=BViT_B,
 )
 
 
