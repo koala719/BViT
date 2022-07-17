@@ -34,7 +34,7 @@ class FeedForward(nn.Module):
     def forward(self, x):
         return self.net(x)
 
-class Attention(nn.Module):
+class Broad_Attention(nn.Module):
     def __init__(self, dim, heads = 8, dim_head = 64, dropout = 0.):
         super().__init__()
         inner_dim = dim_head *  heads
@@ -69,7 +69,7 @@ class Transformer(nn.Module):
         self.layers = nn.ModuleList([])
         for _ in range(depth):
             self.layers.append(nn.ModuleList([
-                PreNorm(dim, Attention(dim, heads = heads, dim_head = dim_head, dropout = dropout)),
+                PreNorm(dim, Broad_Attention(dim, heads = heads, dim_head = dim_head, dropout = dropout)),
                 PreNorm(dim, FeedForward(dim, mlp_dim, dropout = dropout))
             ]))
     def forward(self, x):
@@ -86,7 +86,7 @@ class Transformer(nn.Module):
             V_list.append(v)
         return x, Q_list, K_list, V_list
 
-class ViT(nn.Module):
+class BViT(nn.Module):
     def __init__(self, *, image_size, patch_size, num_classes, dim, depth, heads, mlp_dim, pool = 'cls', channels = 3, dim_head = 64, dropout = 0., emb_dropout = 0.):
         super().__init__()
         image_height, image_width = pair(image_size)
@@ -154,11 +154,8 @@ class ViT(nn.Module):
         x = self.to_latent(x)
         return self.mlp_head(x)
 
-def DeiT_Ti():
-    return ViT(image_size = 224, patch_size = 16, num_classes = 2, dim = 192, depth = 12, heads = 3, mlp_dim = 768, dropout = 0.0, emb_dropout = 0.0)
+def BViT_Ti():
+    return BViT(image_size = 224, patch_size = 16, num_classes = 2, dim = 192, depth = 12, heads = 3, mlp_dim = 768, dropout = 0.0, emb_dropout = 0.0)
 
-def DeiT_S():
-    return ViT(image_size = 224, patch_size = 16, num_classes = 1000, dim = 384, depth = 12, heads = 6, mlp_dim = 1536, dropout = 0.0, emb_dropout = 0.0)
-
-def DeiT_B():
-    return ViT(image_size = 224, patch_size = 16, num_classes = 1000, dim = 768, depth = 12, heads = 12, mlp_dim = 3072, dropout = 0.0, emb_dropout = 0.0)
+def BViT_S():
+    return BViT(image_size = 224, patch_size = 16, num_classes = 1000, dim = 384, depth = 12, heads = 6, mlp_dim = 1536, dropout = 0.0, emb_dropout = 0.0)
