@@ -41,8 +41,6 @@ def get_args_parser():
 
     # Model parameters
     parser.add_argument('--arch', metavar='ARCH', default='BViT-5')
-    parser.add_argument('--model', default='BViT-5', type=str, metavar='MODEL',
-                        help='Name of model to train')
     parser.add_argument('--input-size',  default=224, type=int, help='images input size')
 
     parser.add_argument('--drop', type=float, default=0.0, metavar='PCT',
