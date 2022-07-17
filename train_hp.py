@@ -35,12 +35,12 @@ os.environ['CUDA_VISIBLE_DEVICES']='5, 6, 7'
 
 
 def get_args_parser():
-    parser = argparse.ArgumentParser('DeiT training and evaluation script', add_help=False)
+    parser = argparse.ArgumentParser('BViT training and evaluation script', add_help=False)
     parser.add_argument('--batch-size', default=512, type=int)
     parser.add_argument('--epochs', default=300, type=int)
 
     # Model parameters
-    parser.add_argument('--arch', metavar='ARCH', default='DeiT_Ti')
+    parser.add_argument('--arch', metavar='ARCH', default='BViT-5')
     parser.add_argument('--model', default='BViT-5', type=str, metavar='MODEL',
                         help='Name of model to train')
     parser.add_argument('--input-size',  default=224, type=int, help='images input size')
