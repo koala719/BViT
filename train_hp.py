@@ -252,14 +252,6 @@ def main(args):
             label_smoothing=args.smoothing, num_classes=args.nb_classes)
 
     print(f"Creating model: {args.model}")
-    # model = create_model(
-    #     args.model,
-    #     pretrained=False,
-    #     num_classes=args.nb_classes,
-    #     drop_rate=args.drop,
-    #     drop_path_rate=args.drop_path,
-    #     drop_block_rate=None,
-    # )
 
     model = ImageNetLightningModel(**vars(args))
     # model = resnet34()
@@ -272,46 +264,11 @@ def main(args):
             checkpoint = torch.load(args.finetune, map_location='cpu')
 
         checkpoint_model = checkpoint['model']
-
-
-        # print(checkpoint_model['model.to_patch_embed.1.weight'].size(), 'model.to_patch_embed.1.weight')
-        # print(checkpoint_model['model.to_patch_embed.1.bias'].size(), 'model.to_patch_embed.1.bias')
-        # print(checkpoint_model['model.layers.0.fn.fn.proj_in.0.weight'].size(), 'model.layers.0.fn.fn.proj_in.0.weight')
-        # print(checkpoint_model['model.layers.0.fn.fn.proj_in.0.bias'].size(), 'model.layers.0.fn.fn.proj_in.0.bias')
-        # print(checkpoint_model['model.layers.0.fn.fn.sgu.norm.weight'].size(), 'model.layers.0.fn.fn.sgu.norm.weight')
-        # print(checkpoint_model['model.layers.0.fn.fn.sgu.norm.bias'].size(), 'model.layers.0.fn.fn.sgu.norm.bias')
-        # print(checkpoint_model['model.layers.0.fn.fn.sgu.proj.weight'].size(), 'model.layers.0.fn.fn.sgu.proj.weight')
-        # print(checkpoint_model['model.layers.0.fn.fn.sgu.proj.bias'].size(), 'model.layers.0.fn.fn.sgu.proj.bias')
-        # print(checkpoint_model['model.layers.0.fn.fn.proj_out.weight'].size(), 'model.layers.0.fn.fn.proj_out.weight')
-        # print(checkpoint_model['model.layers.0.fn.fn.proj_out.bias'].size(), 'model.layers.0.fn.fn.proj_out.bias')
-        # print(checkpoint_model['model.layers.0.fn.norm.weight'].size(), 'model.layers.0.fn.norm.weight')
-        # print(checkpoint_model['model.layers.0.fn.norm.bias'].size(), 'model.layers.0.fn.norm.bias')
         state_dict = model.state_dict()
         for k in ['head.weight', 'head.bias', 'head_dist.weight', 'head_dist.bias']:
             if k in checkpoint_model and checkpoint_model[k].shape != state_dict[k].shape:
                 print(f"Removing key {k} from pretrained checkpoint")
                 del checkpoint_model[k]
-
-        # interpolate position embedding
-        # pos_embed_checkpoint = checkpoint_model['pos_embed']
-        # embedding_size = pos_embed_checkpoint.shape[-1]
-        # num_patches = model.patch_embed.num_patches
-        # num_extra_tokens = model.pos_embed.shape[-2] - num_patches
-        # # height (== width) for the checkpoint position embedding
-        # orig_size = int((pos_embed_checkpoint.shape[-2] - num_extra_tokens) ** 0.5)
-        # # height (== width) for the new position embedding
-        # new_size = int(num_patches ** 0.5)
-        # # class_token and dist_token are kept unchanged
-        # extra_tokens = pos_embed_checkpoint[:, :num_extra_tokens]
-        # # only the position tokens are interpolated
-        # pos_tokens = pos_embed_checkpoint[:, num_extra_tokens:]
-        # pos_tokens = pos_tokens.reshape(-1, orig_size, orig_size, embedding_size).permute(0, 3, 1, 2)
-        # pos_tokens = torch.nn.functional.interpolate(
-        #     pos_tokens, size=(new_size, new_size), mode='bicubic', align_corners=False)
-        # pos_tokens = pos_tokens.permute(0, 2, 3, 1).flatten(1, 2)
-        # new_pos_embed = torch.cat((extra_tokens, pos_tokens), dim=1)
-        # checkpoint_model['pos_embed'] = new_pos_embed
-
         model.load_state_dict(checkpoint_model, strict=False)
 
     model.to(device)
@@ -327,7 +284,6 @@ def main(args):
 
     model_without_ddp = model
     if args.distributed:
-        # print("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
         print('======================================')
         # model = torch.nn.DataParallel(model).cuda()
 
@@ -449,7 +405,7 @@ def main(args):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser('DeiT training and evaluation script', parents=[get_args_parser()])
+    parser = argparse.ArgumentParser('BViT training and evaluation script', parents=[get_args_parser()])
     args = parser.parse_args()
     if args.output_dir:
         Path(args.output_dir).mkdir(parents=True, exist_ok=True)
