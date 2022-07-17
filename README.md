@@ -15,3 +15,6 @@ If you find BViT is helpful in your project, please consider citing our paper.
 }
 ```
 
+## Acknowledgements
+The codes are inspired by [timm](https://github.com/rwightman/pytorch-image-models), [DeiT](https://github.com/facebookresearch/deit), [ViT-torch](https://github.com/lucidrains/vit-pytorch).
+
