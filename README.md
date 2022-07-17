@@ -6,11 +6,11 @@ Recent works have demonstrated that transformer can achieve promising performanc
 
 ## Bibtex
 If you find BViT is helpful in your project, please consider citing our paper.
-'''
-@article{li2022bvit,
+
+'''@article{li2022bvit,
   title={BViT: Broad Attention based Vision Transformer},
   author={Li, Nannan and Chen, Yaran and Li, Weifan and Ding, Zixiang and Zhao, Dongbin},
   journal={arXiv preprint arXiv:2202.06268},
   year={2022}
-}
-'''
+}'''
+
