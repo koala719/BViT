@@ -7,7 +7,7 @@ Recent works have demonstrated that transformer can achieve promising performanc
 ## Model Results
 |  Model   | Top1-Acc(%)  |  Params (M)   | Flops(G)  | Model  |
 |  ----  | ----  |  ----  | ----  | ----  |
-| BViT-5M  | 74.8 |  5.7  | 1.2  | [Download](https://arxiv.org/abs/2202.06268)   |
+| BViT-5M  | 74.8 |  5.7  | 1.2  | [Download](https://pan.baidu.com/s/1G_Zh-qDbAtcYvVYLXoF-Nw?pwd=dbgi)   |
 | BViT-22M  | 81.6 |  22.1  | 4.7  | [Download](https://arxiv.org/abs/2202.06268)   |
 
 ## Evaluation
